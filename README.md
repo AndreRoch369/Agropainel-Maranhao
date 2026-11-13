@@ -1,76 +1,184 @@
-# AgroPainel Sul do Maranhão
+# AgroPainel Sul do Maranhão 
 
-Sistema de gestão de talhões, operações agrícolas, clima e relatório de safra para produtores do sul do Maranhão.
+O AgroPainel Sul do Maranhão é uma aplicação web desenvolvida para auxiliar no acompanhamento e gerenciamento de atividades agrícolas. O sistema permite cadastrar e gerenciar talhões, registrar operações da safra, consultar condições meteorológicas e visualizar indicadores relacionados à produção agrícola.
 
-**Tema:** A — Aula 10, Programação para Web (UNIBALSAS)  
-**Aplicação publicada:** a definir (inserir o link após publicação)
+## Informações do projeto
+
+- Nome da aplicação: AgroPainel Sul do Maranhão
+- Equipe: AgroTech Maranhão
+- Tema: A — AgroPainel
+- Disciplina: Programação para Web
+- Instituição: Centro Universitário de Balsas – UNIBALSAS
+- Professor: Marcos David Souza Ramos
+
+Aplicação publicada: https://agropainel-maranhao.vercel.app/
+
+Repositório GitHub: https://github.com/AndreRoch369/Agropainel-Maranhao
 
 ## Equipe
 
-| Integrante | Responsável por |
-|---|---|
-| Preencher nome 1 | Definir responsabilidade |
-| Preencher nome 2 | Definir responsabilidade |
+| Integrante | Responsabilidade |
 
-## Como rodar
+| [Mickael Miranda de Sousa 1] | Desenvolvimento, integração da aplicação e Regras de negócio |
+| [André Rocha Figueredo 2] | Interface, componentes do sistema, testes e documentação  |
 
-É necessário ter o Node.js instalado. No terminal do VS Code:
+
+## Tecnologias utilizadas
+
+- React: desenvolvimento da interface por componentes.
+- TypeScript: tipagem e organização do código.
+- Vite: ambiente de desenvolvimento e geração da versão de produção.
+- React Router DOM: gerenciamento da navegação entre as páginas.
+- Context API: compartilhamento dos dados entre os componentes.
+- localStorage: armazenamento dos cadastros no navegador.
+- Vitest: execução dos testes automatizados.
+- Open-Meteo: consulta de informações meteorológicas.
+
+# Funcionalidades
+
+- Visualização de indicadores gerais da safra.
+- Consulta de condições meteorológicas por município.
+- Previsão do tempo e indicador de condições para pulverização.
+- Cadastro, consulta, edição e exclusão de talhões.
+- Registro de operações agrícolas.
+- Acompanhamento do desenvolvimento das culturas.
+- Estimativa da previsão de colheita.
+- Relatório de área, custos e produção.
+
+# Como executar o projeto
+
+# Pré-requisitos
+
+É necessário ter o Node.js e o npm instalados no computador.
+
+# 1. Clonar o repositório
+
+```bash
+git clone https://github.com/AndreRoch369/Agropainel-Maranhao.git
+```
+
+### 2. Entrar na pasta do projeto
+
+```bash
+cd Agropainel-Maranhao
+```
+
+### 3. Instalar as dependências
 
 ```bash
 npm install
+```
+
+### 4. Executar a aplicação
+
+```bash
 npm run dev
 ```
 
-Abra a URL informada pelo Vite (geralmente `http://localhost:5173/`).
+O Vite apresentará um endereço local no terminal, normalmente `http://localhost:5173/`. Abra esse endereço no navegador.
 
-## Comandos
+### 5. Executar os testes
 
 ```bash
-npm run dev       # desenvolvimento
-npm test          # testes Vitest
-npm run build     # checagem TypeScript + build de produção
-npm run preview   # visualizar build local
+npm test
 ```
 
-## Tecnologias
+### 6. Gerar a versão de produção
 
-React, TypeScript, Vite, React Router com HashRouter, Context API, localStorage, Vitest, CSS e API Open-Meteo.
+```bash
+npm run build
+```
 
-## Telas
+Os arquivos gerados ficam na pasta `dist`.
 
-- `/#/` — Painel e clima
-- `/#/talhoes` — Listagem, busca e filtros
-- `/#/talhoes/novo` — Cadastro
-- `/#/talhoes/:id` — Detalhes e diário de operações
-- `/#/talhoes/:id/editar` — Edição e exclusão
-- `/#/relatorio` — Relatório da safra
-- Endereço inválido — Página não encontrada
+# Telas da aplicação
 
-## Fonte de dados
 
-Clima atual e previsão de sete dias: [Open-Meteo](https://open-meteo.com/).  
-Atribuição: **Dados meteorológicos: Open-Meteo.com**.
+As capturas de tela apresentadas nesta seção estão disponíveis na pasta `docs/capturas` do projeto, onde foram organizadas para documentar visualmente as principais funcionalidades do sistema.
 
-Os dados cadastrados pelo usuário ficam apenas no `localStorage` deste navegador. Não existe servidor de dados ou login.
+A aplicação utiliza React Router com HashRouter para organizar a navegação entre as páginas.
 
-## Estrutura
+# Regras de negócio
 
-- `src/tipos` — interfaces e uniões TypeScript
-- `src/dados` — lista fixa dos oito municípios
-- `src/dominio` — regras puras e testes
-- `src/servicos` — requisição à Open-Meteo
-- `src/contexto` — estado compartilhado e persistência
-- `src/componentes` — componentes reaproveitáveis
-- `src/paginas` — páginas e formulários
+As principais regras estão organizadas no arquivo `src/dominio/regras.ts`.
 
-## Regras e testes
+1. Validação do cadastro: verifica o preenchimento correto dos dados do talhão.
+2. Nome único: impede o cadastro de talhões com nomes duplicados.
+3. Validação da área: exige uma área maior que zero e respeita o limite definido pelo sistema.
+4. Data de plantio: impede o registro de datas futuras.
+5. Previsão de colheita: calcula uma estimativa conforme a cultura e a data de plantio.
+6. Situação da cultura: identifica se o talhão está aguardando plantio, em desenvolvimento ou próximo da colheita.
+7. Registro de operações: valida as atividades agrícolas conforme suas regras.
+8. Controle de colheita: impede o registro de uma segunda colheita para o mesmo talhão.
+9. Cálculo de custos: realiza cálculos de custos totais e por hectare.
+10. Produção agrícola: calcula indicadores relacionados à produtividade e produção em sacas.
 
-Os cenários A01 a A13 são cobertos por testes de regras em `src/dominio/regras.test.ts`. Os cenários A14 (troca de município) e A15 (falha de rede) devem ser conferidos manualmente na interface. Execute `npm test` para rodar os testes após instalar as dependências.
+Os testes automatizados dessas regras estão no arquivo `src/dominio/regras.test.ts`.
 
-## Limitações e próximos passos
+Durante a execução registrada, foram aprovados 19 testes automatizados, sem falhas.
 
-Este pacote é uma **primeira versão funcional para desenvolvimento**, não é a entrega final avaliada. A equipe deve testar os cenários na interface, revisar acessibilidade, publicar a aplicação, adicionar os nomes reais e registrar commits de todos os integrantes. As operações são armazenadas no navegador; não há sincronização entre dispositivos.
+## Organização do projeto
 
-## Referência
+```text
+agropainel/
+├── docs/
+│   └── capturas/
+│       ├── painel.png
+│       ├── talhoes.png
+│       ├── novo-talhao.png
+│       ├── detalhe-talhao.png
+│       ├── editar-talhao.png
+│       └── relatorio.png
+├── src/
+│   ├── componentes/
+│   ├── contexto/
+│   ├── dados/
+│   ├── dominio/
+│   ├── paginas/
+│   ├── servicos/
+│   ├── tipos/
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── styles.css
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+└── vite.config.ts
+```
 
-Enunciado da Aula 10 — Prof. Marcos David Souza Ramos, UNIBALSAS.
+# Decisões técnicas
+
+O projeto foi organizado utilizando componentes React para separar as funcionalidades e facilitar a manutenção do código.
+
+O TypeScript foi utilizado para melhorar a organização e a tipagem dos dados. A Context API permite compartilhar as informações dos talhões e das operações entre as páginas.
+
+O armazenamento dos dados é realizado por meio do localStorage, permitindo que os cadastros permaneçam disponíveis no navegador mesmo após a atualização da página.
+
+As regras de negócio foram separadas dos componentes visuais, facilitando a realização dos testes automatizados.
+
+Para as informações meteorológicas, foi utilizada a API Open-Meteo. A navegação utiliza HashRouter, facilitando a publicação da aplicação em hospedagem estática.
+
+Limitação da versão: os dados dos cadastros ficam armazenados localmente no navegador. O sistema não utiliza banco de dados remoto nem sincronização entre dispositivos.
+
+# Publicação
+
+A aplicação foi publicada na plataforma Vercel, integrada ao repositório do GitHub.
+
+- Acessar o sistema: https://agropainel-maranhao.vercel.app/
+- Acessar o código-fonte: https://github.com/AndreRoch369/Agropainel-Maranhao
+
+# Créditos
+
+- Open-Meteo: API utilizada para consulta de informações meteorológicas. https://open-meteo.com/
+- React: https://react.dev/
+- TypeScript: https://www.typescriptlang.org/
+- Vite: https://vite.dev/
+- Vitest: https://vitest.dev/
+
+---
+
+AgroPainel Sul do Maranhão — AgroTech Maranhão
+
+Projeto acadêmico desenvolvido para a disciplina de Programação para Web, do curso de Análise e Desenvolvimento de Sistemas do Centro Universitário de Balsas – UNIBALSAS.
