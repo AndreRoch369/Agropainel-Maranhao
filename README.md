@@ -27,8 +27,9 @@ Integrantes:
 
  | Integrante | Responsabilidade |
 
- | [Mickael Miranda de Sousa 1] | Desenvolvimento, integração da aplicação e Regras de negócio |
- | [André Rocha Figueredo 2] | Interface, componentes do sistema, testes e documentação |
+ | [Mickael Miranda de Sousa 1] | Desenvolvimento, integração da aplicação  |
+ | [André Rocha Figueredo 2] |Interface, componentes do sistema, e Regras de negócio  |
+ | [Pedro igor 3] |testes e documentação|
 
 A equipe participou do planejamento, desenvolvimento, implementação das funcionalidades, testes e organização da documentação do sistema.
 
